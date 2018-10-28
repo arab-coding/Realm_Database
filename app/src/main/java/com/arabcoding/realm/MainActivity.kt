@@ -26,10 +26,20 @@ class MainActivity : AppCompatActivity() {
         person.job = "مدير"
         realm.commitTransaction()
 
-        val all = realm.where(Person::class.java).findAll()
+        //update
+        val allPerson = realm.where(Person::class.java).equalTo("name","أحمد").findFirst()
+        realm.beginTransaction()
+        allPerson?.job = "سكرتير"
 
-        all.forEach {per ->
-            println( "id: " + per.id +  " name: " +per.name)
+
+        /*allPerson.forEach { pers ->
+            pers.job = "عامل"
+        }*/
+        realm.commitTransaction()
+
+        val all = realm.where(Person::class.java).findAll()
+        all.forEach { per ->
+            println( "id: " + per.id +  " name: " +per.name + " job: " + per.job)
         }
     }
 
