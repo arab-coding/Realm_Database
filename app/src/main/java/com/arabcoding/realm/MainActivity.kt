@@ -19,23 +19,36 @@ class MainActivity : AppCompatActivity() {
         val realm =Realm.getInstance(config)
 
         //create
-        realm.beginTransaction()
+/*        realm.beginTransaction()
         id = realm.where(Person::class.java).findAll().size
         val person = realm.createObject(Person::class.java,id+1)
         person.name = "علي"
         person.age = 22
         person.job = "مدير"
-        realm.commitTransaction()
+        realm.commitTransaction()*/
         //end create
 
-        //update
-        val allPerson = realm.where(Person::class.java).equalTo("name",  "أحمد").findFirst()
+        // delete
+        var id = 10
+        var person = realm.where(Person::class.java).equalTo("id",  id).findFirst()
         realm.beginTransaction()
-        allPerson?.job = "سكرتير"
-        /*allPerson.forEach { pers ->
-            pers.job = "عامل"
-        }*/
+        person?.deleteFromRealm()
         realm.commitTransaction()
+
+/*        var person = realm.where(Person::class.java).findAll()
+        realm.beginTransaction()
+        person.deleteAllFromRealm()
+        realm.commitTransaction()*/
+        //end delete
+
+        //update
+//        val allPerson = realm.where(Person::class.java).equalTo("name",  "أحمد").findFirst()
+//        realm.beginTransaction()
+//        allPerson?.job = "سكرتير"
+//        /*allPerson.forEach { pers ->
+//            pers.job = "عامل"
+//        }*/
+//        realm.commitTransaction()
         //end update
 
         //read
